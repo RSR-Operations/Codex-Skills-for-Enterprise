@@ -1,0 +1,4 @@
+interface:
+  display_name: "Automation Opportunity Map"
+  short_description: "Prioritize repeatable workflows for automation"
+  default_prompt: "Use $automation-opportunity-map to identify and prioritize automation opportunities from this workflow description."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Memo"
+  short_description: "Frame options, tradeoffs, and decisions"
+  default_prompt: "Use $decision-memo to draft a decision memo with options, tradeoffs, risks, and a recommendation."

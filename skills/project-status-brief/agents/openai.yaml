@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Status Brief"
+  short_description: "Standardize project health and escalations"
+  default_prompt: "Use $project-status-brief to turn these project updates into a clear status brief."

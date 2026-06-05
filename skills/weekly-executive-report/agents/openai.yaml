@@ -1,0 +1,4 @@
+interface:
+  display_name: "Weekly Executive Report"
+  short_description: "Create concise executive status reports"
+  default_prompt: "Use $weekly-executive-report to synthesize these updates into an executive-ready weekly report."

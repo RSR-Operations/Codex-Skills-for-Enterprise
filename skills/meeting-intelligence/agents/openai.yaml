@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Intelligence"
+  short_description: "Turn meetings into decisions and action"
+  default_prompt: "Use $meeting-intelligence to turn these meeting notes into decisions, actions, risks, and follow-ups."
