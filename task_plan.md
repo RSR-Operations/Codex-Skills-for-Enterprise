@@ -12,7 +12,7 @@ Make the enterprise skills repository easier to discover, install, validate, and
 - [x] Push V2 milestone.
 - [ ] Implement usability upgrade.
 - [ ] Validate installer, packs, docs, and skill structure.
-- [ ] Commit and push usability upgrade.
+- [x] Commit and push usability upgrade.
 
 ## Phases
 
@@ -23,7 +23,7 @@ Make the enterprise skills repository easier to discover, install, validate, and
 | 3. Installer and packs | complete | Added local installer, pack metadata, and pack validation. |
 | 4. Docs and README | complete | Added pack docs, maturity levels, adapter guidance, and README updates. |
 | 5. Validation | complete | Repo validator, official skill validator, syntax checks, installer smoke tests, ASCII scan, and cache cleanup passed. |
-| 6. Final commit/push | in_progress | Commit and push usability upgrade. |
+| 6. Final commit/push | complete | Usability upgrade committed and pushed as `80a04e7`; planning files updated after push. |
 
 ## Decisions
 
@@ -36,3 +36,4 @@ Make the enterprise skills repository easier to discover, install, validate, and
 
 | Error | Attempt | Resolution |
 | --- | --- | --- |
+| `git push` DNS failure | push V2 and usability commits | Reran each push with approved network access. |

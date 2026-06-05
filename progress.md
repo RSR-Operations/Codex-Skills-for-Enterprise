@@ -14,3 +14,6 @@
 - Ran installer smoke tests in `/tmp/codex-skill-install-test.zuECCG`: single skill install, revenue pack install, knowledge pack dry run, overwrite refusal, forced overwrite, and installed file checks all passed.
 - Ran final validation: repo validator passed, official Codex validator passed for all 14 skills, Python syntax checks passed, ASCII scan clean.
 - Removed generated `scripts/__pycache__`.
+- Committed usability upgrade as `80a04e7 Add skill packs and local installer`.
+- Initial push failed due sandboxed DNS resolution; reran with approved network access.
+- Pushed usability upgrade to `origin/main`.

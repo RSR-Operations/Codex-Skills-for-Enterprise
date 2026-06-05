@@ -18,3 +18,4 @@
 - Usability upgrade should include `skill-packs.json`, `scripts/install_skill.py`, pack validation, and docs.
 - V2 milestone is now committed and pushed as `62c1931`; usability work can proceed independently.
 - Installer smoke tests confirmed the local installer preserves `SKILL.md`, `agents/openai.yaml`, and `references/` content.
+- Usability upgrade is committed and pushed as `80a04e7`.
