@@ -52,16 +52,60 @@ Codex Skills make that possible by giving Codex targeted procedural knowledge fo
 | `policy-impact-analysis` | Translate policy changes into business impact and action plans | Policies, regulations, or internal guidance need gap analysis and rollout guidance |
 | `knowledge-base-capture` | Preserve institutional knowledge as maintainable KB articles | Meetings, support threads, SOPs, or learnings need reusable documentation |
 
+## Install Skills
+
+List every available skill and pack:
+
+```bash
+python3 scripts/install_skill.py --list
+```
+
+Install one skill into `${CODEX_HOME:-$HOME/.codex}/skills`:
+
+```bash
+python3 scripts/install_skill.py ci-failure-triage
+```
+
+Install a full pack:
+
+```bash
+python3 scripts/install_skill.py --pack engineering-ops
+```
+
+Preview an install without copying files:
+
+```bash
+python3 scripts/install_skill.py --dry-run --pack revenue-ops
+```
+
+Existing installed skills are never overwritten unless `--force` is passed.
+
+## Skill Packs
+
+| Pack | Focus | Install command |
+| --- | --- | --- |
+| `executive-ops` | leadership rhythm, decisions, reports, project status, automation intake | `python3 scripts/install_skill.py --pack executive-ops` |
+| `engineering-ops` | CI triage, PR review, release communication | `python3 scripts/install_skill.py --pack engineering-ops` |
+| `revenue-ops` | CRM hygiene, account research, proposals | `python3 scripts/install_skill.py --pack revenue-ops` |
+| `knowledge-ops` | research, policy impact, knowledge-base capture | `python3 scripts/install_skill.py --pack knowledge-ops` |
+| `all` | every skill in the repository | `python3 scripts/install_skill.py --pack all` |
+
+See [Skill Packs](docs/skill-packs.md) for pack details and adoption guidance.
+
 ## Repository Structure
 
 ```text
 .
 |-- README.md
 |-- CONTRIBUTING.md
+|-- skill-packs.json
 |-- docs/
 |   |-- adoption-guide.md
+|   |-- adapter-patterns.md
 |   |-- examples.md
 |   |-- forward-test-playbook.md
+|   |-- maturity-levels.md
+|   |-- skill-packs.md
 |   |-- skill-quality-standard.md
 |   `-- v2-skill-examples.md
 |-- skills/
@@ -74,6 +118,7 @@ Codex Skills make that possible by giving Codex targeted procedural knowledge fo
 |   |-- skill-review-checklist.md
 |   `-- trigger-examples.md
 |-- scripts/
+|   |-- install_skill.py
 |   `-- validate_skills.py
 `-- .github/workflows/validate-skills.yml
 ```
@@ -89,11 +134,10 @@ Codex Skills make that possible by giving Codex targeted procedural knowledge fo
 
 2. Review the catalog in `skills/` and select the skill that matches the workflow.
 
-3. Copy or install the selected skill into the Codex skills directory used by your environment.
+3. Install the selected skill into the Codex skills directory used by your environment.
 
    ```bash
-   mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-   cp -R skills/meeting-intelligence "${CODEX_HOME:-$HOME/.codex}/skills/"
+   python3 scripts/install_skill.py meeting-intelligence
    ```
 
 4. Invoke the skill in Codex with a concrete business artifact.
@@ -122,6 +166,12 @@ Every skill in this repository must meet a strict v1 standard:
 See [Skill Quality Standard](docs/skill-quality-standard.md) for the full checklist.
 
 For the v2 skill expansion, see [V2 Skill Examples](docs/v2-skill-examples.md) and [Forward-Test Playbook](docs/forward-test-playbook.md) for realistic prompts, quality criteria, and smoke-test guidance.
+
+See [Maturity Levels](docs/maturity-levels.md) for a practical model that moves skills from prompted workflows to audited, tool-connected enterprise workflows. See [Adapter Patterns](docs/adapter-patterns.md) for optional integration guidance that keeps the core skills vendor-neutral.
+
+## Inspiration
+
+This repository is inspired in part by the broader Codex Skills ecosystem, including marketplace-style catalogs and install flows seen in community repositories such as `ComposioHQ/awesome-codex-skills`. The implementation here adapts concepts only: code, prose, and skill content are original to this repository.
 
 ## Enterprise Adoption Path
 

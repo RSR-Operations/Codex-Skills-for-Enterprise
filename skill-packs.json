@@ -1,0 +1,40 @@
+{
+  "executive-ops": [
+    "meeting-intelligence",
+    "weekly-executive-report",
+    "decision-memo",
+    "project-status-brief",
+    "automation-opportunity-map"
+  ],
+  "engineering-ops": [
+    "ci-failure-triage",
+    "pr-review-brief",
+    "release-notes-generator"
+  ],
+  "revenue-ops": [
+    "crm-hygiene-auditor",
+    "account-research-brief",
+    "proposal-drafting-assistant"
+  ],
+  "knowledge-ops": [
+    "research-synthesis-brief",
+    "policy-impact-analysis",
+    "knowledge-base-capture"
+  ],
+  "all": [
+    "meeting-intelligence",
+    "weekly-executive-report",
+    "decision-memo",
+    "project-status-brief",
+    "automation-opportunity-map",
+    "ci-failure-triage",
+    "pr-review-brief",
+    "release-notes-generator",
+    "crm-hygiene-auditor",
+    "account-research-brief",
+    "proposal-drafting-assistant",
+    "research-synthesis-brief",
+    "policy-impact-analysis",
+    "knowledge-base-capture"
+  ]
+}

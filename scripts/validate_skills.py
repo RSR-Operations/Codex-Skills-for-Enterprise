@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import sys
+import json
 from pathlib import Path
 
 try:
@@ -15,6 +16,7 @@ except ImportError:  # pragma: no cover - depends on local environment
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
+PACKS_FILE = ROOT / "skill-packs.json"
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DISALLOWED_SKILL_DOCS = {
     "README.md",
@@ -107,6 +109,58 @@ def validate_skill(skill_dir: Path) -> list[str]:
     return errors
 
 
+def validate_packs(skill_dirs: list[Path]) -> list[str]:
+    errors: list[str] = []
+    skill_names = {path.name for path in skill_dirs}
+
+    if not PACKS_FILE.exists():
+        errors.append("missing skill-packs.json")
+        return errors
+
+    try:
+        data = json.loads(PACKS_FILE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"invalid skill-packs.json: {exc}")
+        return errors
+
+    if not isinstance(data, dict):
+        errors.append("skill-packs.json must contain an object")
+        return errors
+
+    required_packs = {"executive-ops", "engineering-ops", "revenue-ops", "knowledge-ops", "all"}
+    missing_packs = required_packs - set(data)
+    if missing_packs:
+        errors.append(f"skill-packs.json missing pack(s): {', '.join(sorted(missing_packs))}")
+
+    for pack_name, skills in data.items():
+        if not NAME_RE.fullmatch(pack_name):
+            errors.append(f"pack '{pack_name}' must use lowercase hyphen-case")
+        if not isinstance(skills, list) or not skills:
+            errors.append(f"pack '{pack_name}' must contain a non-empty skill list")
+            continue
+        seen: set[str] = set()
+        for skill_name in skills:
+            if not isinstance(skill_name, str):
+                errors.append(f"pack '{pack_name}' contains a non-string skill reference")
+                continue
+            if skill_name in seen:
+                errors.append(f"pack '{pack_name}' contains duplicate skill '{skill_name}'")
+            seen.add(skill_name)
+            if skill_name not in skill_names:
+                errors.append(f"pack '{pack_name}' references unknown skill '{skill_name}'")
+
+    all_pack = data.get("all")
+    if isinstance(all_pack, list) and set(all_pack) != skill_names:
+        missing = skill_names - set(all_pack)
+        extra = set(all_pack) - skill_names
+        if missing:
+            errors.append(f"pack 'all' missing skill(s): {', '.join(sorted(missing))}")
+        if extra:
+            errors.append(f"pack 'all' has unknown skill(s): {', '.join(sorted(extra))}")
+
+    return errors
+
+
 def main() -> int:
     if not SKILLS_DIR.exists():
         print("Missing skills/ directory", file=sys.stderr)
@@ -120,6 +174,7 @@ def main() -> int:
     errors: list[str] = []
     for skill_dir in skill_dirs:
         errors.extend(validate_skill(skill_dir))
+    errors.extend(validate_packs(skill_dirs))
 
     if errors:
         print("Skill validation failed:", file=sys.stderr)
