@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ECSE.png" alt="ECSE" width="720" />
+</p>
+
 # Codex Skills for Enterprise
 
 Premium, practical Codex Skills for teams that want to accelerate executive work, automate repeatable workflows, and raise the quality of day-to-day knowledge operations.
